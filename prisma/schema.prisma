@@ -25,10 +25,15 @@ model Shoe {
   sizes Size[]
   categories Category[]
   shoeOrder ShoeOrder[]
+
+  @@map(name :"shoe")
 }
+
 model Type{
   id Int @default(autoincrement()) @id
   name String
+
+  @@map(name :"type")
 }
 
 
@@ -36,6 +41,8 @@ model Brand{
   id Int @id @default(autoincrement())
   name String
   logoUrl String
+
+  @@map(name :"brand")
 }
 
 model User{
@@ -43,6 +50,8 @@ model User{
   fullName String
   email String @unique
   password String
+
+  @@map(name :"user")
 }
 
 model Color{
@@ -53,6 +62,8 @@ model Color{
   shoes Shoe[]
   shoeOrder ShoeOrder[]
 
+  @@map(name :"color")
+
 }
 
 model Size{
@@ -61,6 +72,8 @@ model Size{
 
   shoes Shoe[]
   shoeOrder ShoeOrder[]
+
+  @@map(name :"size")
 }
 
 model Category{
@@ -68,6 +81,8 @@ model Category{
   name String
 
   shoes Shoe[]
+
+  @@map(name :"category")
 }
 
 model Order{
@@ -84,6 +99,8 @@ model Order{
   datePlaced DateTime @default(now())
 
   shoeOrder ShoeOrder[]
+
+  @@map(name :"order")
 }
 
 model ShoeOrder{
@@ -103,4 +120,6 @@ model ShoeOrder{
 
   quantity Int
   price Float
+
+  @@map("_shoetoorder")
 }
