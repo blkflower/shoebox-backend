@@ -9,3 +9,112 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+model Shoe {
+  id Int @default(autoincrement()) @id
+  name String 
+  description String? 
+  type String
+  brand String
+  price Float
+  totalStocks Int
+  remainingStocks Int
+  imageUrl String
+
+ // colors Color[]
+ // sizes Size[]
+ // categories Category[]
+ // shoeOrders ShoeOrder[]
+}
+
+model Type{
+  id Int @default(autoincrement()) @id
+  name String
+}
+
+
+model Brand{
+  id Int @id @default(autoincrement())
+  name String
+  logoUrl String
+
+}
+
+model User{
+  id Int @default(autoincrement()) @id
+  fullName String
+  email String @unique
+  password String
+
+//  order Order[]
+
+}
+
+model Color{
+  id Int @id @default(autoincrement())
+  name String
+  hex String
+
+ // shoes Shoe[]
+ // shoeOrders ShoeOrder[]
+
+
+}
+
+model Size{
+  id Int @id @default(autoincrement())
+  size String
+
+ // shoes Shoe[]
+ // shoeOrders ShoeOrder[]
+
+}
+
+model Category{
+  id Int @id @default(autoincrement())
+  name String
+
+ // shoes Shoe[]
+
+}
+
+model Order{
+  id Int @id @default(autoincrement())
+  
+ // user User @relation(fields:[userId], references: [id])
+ // userId Int
+
+  total Float
+  addressStreet String
+  addressCity String
+  addressZipCode String
+  paymentCardNumber String
+  paymentExpiry String
+  paymentCvv String
+  isPlaced Boolean @default(false)
+  datePlaced DateTime @default(now())
+
+ // shoeOrders ShoeOrder[]
+
+
+}
+
+model ShoeOrder{
+  id Int @id @default(autoincrement())
+
+ // order Order @relation(fields:[orderId], references: [id])
+ // orderId Int
+
+ // shoe Shoe @relation(fields:[shoeId], references: [id])
+ // shoeId Int
+
+//  color Color @relation(fields:[colorId], references: [id])
+ // colorId Int
+
+ // size Size @relation(fields:[sizeId], references: [id])
+ // sizeId Int
+
+  quantity Int
+  price Float
+
+}
