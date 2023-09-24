@@ -21,10 +21,10 @@ model Shoe {
   remainingStocks Int
   imageUrl String
 
-  colors Color[]
-  sizes Size[]
-  categories Category[]
-  shoeOrder ShoeOrder[]
+ // colors Color[]
+ // sizes Size[]
+ // categories Category[]
+ // shoeOrders ShoeOrder[]
 }
 
 model Type{
@@ -46,6 +46,8 @@ model User{
   email String @unique
   password String
 
+//  order Order[]
+
 }
 
 model Color{
@@ -53,8 +55,8 @@ model Color{
   name String
   hex String
 
-  shoes Shoe[]
-  shoeOrder ShoeOrder[]
+ // shoes Shoe[]
+ // shoeOrders ShoeOrder[]
 
 
 }
@@ -63,8 +65,8 @@ model Size{
   id Int @id @default(autoincrement())
   size String
 
-  shoes Shoe[]
-  shoeOrder ShoeOrder[]
+ // shoes Shoe[]
+ // shoeOrders ShoeOrder[]
 
 }
 
@@ -72,13 +74,16 @@ model Category{
   id Int @id @default(autoincrement())
   name String
 
-  shoes Shoe[]
+ // shoes Shoe[]
 
 }
 
 model Order{
   id Int @id @default(autoincrement())
-  user String
+  
+ // user User @relation(fields:[userId], references: [id])
+ // userId Int
+
   total Float
   addressStreet String
   addressCity String
@@ -89,24 +94,25 @@ model Order{
   isPlaced Boolean @default(false)
   datePlaced DateTime @default(now())
 
-  shoeOrder ShoeOrder[]
+ // shoeOrders ShoeOrder[]
+
 
 }
 
 model ShoeOrder{
   id Int @id @default(autoincrement())
 
-  order Order @relation(fields:[orderId], references: [id])
-  orderId Int
+ // order Order @relation(fields:[orderId], references: [id])
+ // orderId Int
 
-  shoe Shoe @relation(fields:[shoeId], references: [id])
-  shoeId Int
+ // shoe Shoe @relation(fields:[shoeId], references: [id])
+ // shoeId Int
 
-  color Color @relation(fields:[colorId], references: [id])
-  colorId Int
+//  color Color @relation(fields:[colorId], references: [id])
+ // colorId Int
 
-  size Size @relation(fields:[sizeId], references: [id])
-  sizeId Int
+ // size Size @relation(fields:[sizeId], references: [id])
+ // sizeId Int
 
   quantity Int
   price Float
